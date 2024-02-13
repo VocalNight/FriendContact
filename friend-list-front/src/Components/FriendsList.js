@@ -14,21 +14,24 @@ useEffect(() => {
     fetchFriends();
 }, [])
 
-const fetchFriends = () => {
-    axios.get('https://localhost:7187/api/Friends')
-    .then(response => setFriends(response.data))
-    .catch(error => console.log(error));
+const fetchFriends = async () => {
+    try {
+        const response = await axios.get('https://localhost:7187/api/Friends');
+        setFriends(response.data);
+    }
+    catch (error) {
+        console.log(error)
+    }
 }
 
-const fetchCategories = () => {
-    axios.get('https://localhost:7187/api/Categories')
-    .then(response => setCategories(response.data))
-    .catch(error => console.log(error));
-}
-
-const check = () => {
-    console.log(categories);
-    console.log(categories.find(c => c.id === 1));
+const fetchCategories = async () => {
+    try {
+        const response = await axios.get('https://localhost:7187/api/Categories');
+        setCategories(response.data);
+    }
+    catch (error) {
+        console.log(error)
+    }
 }
 
     return(
@@ -36,8 +39,7 @@ const check = () => {
         <div>
             <ul>
                 {friends.map(friend => (
-                    <li 
-                    onClick={() => check()} 
+                    <li       
                     key={friend.id}>
                         {friend.name} - 
                         {friend.lastContactDate} - 
@@ -48,8 +50,8 @@ const check = () => {
                         </li>
                 ))}
             </ul>
-            <Modal className="modal" isOpen={showFriendsMod}>
-                    <FriendModal handleClose={() => setShowFriendsMod(false)} />
+            <Modal className="modal" ariaHideApp={false} isOpen={showFriendsMod}>
+                    <FriendModal handleClose={() => setShowFriendsMod(false)} friendCategories={categories} />
             </Modal>
             <div>
                 <button type="button" onClick={() => setShowFriendsMod(true)}>New Friend</button>

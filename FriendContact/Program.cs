@@ -22,6 +22,7 @@ builder.Services.AddDbContext<FriendListContext>(opt =>
 opt.UseSqlServer(builder.Configuration.GetConnectionString("Database")));
 
 var app = builder.Build();
+app.UseCors(corsPolicy);
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -39,7 +40,7 @@ using (var scope = app.Services.CreateScope())
 }
 
 app.UseHttpsRedirection();
-app.UseCors(corsPolicy);
+
 app.UseAuthorization();
 app.MapControllers();
 
