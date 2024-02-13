@@ -11,12 +11,12 @@ export default function FriendModal({ handleClose, friendCategories, friend }) {
         const formData = new FormData(form);
         const formJson = Object.fromEntries(formData.entries());
 
-        if (!friend) {
-
+        if (friend) {
+            editFriend(friend, formJson);
         } else {
             createFriend(formJson);
         }
-        
+
         handleClose();
     }
 
@@ -30,6 +30,19 @@ export default function FriendModal({ handleClose, friendCategories, friend }) {
         })
         .then(response => console.log(response))
         .catch(error => console.log(error));
+    }
+
+    function editFriend(friend, formJson) {
+        axios.put('https://localhost:7187/api/Friends/' + friend.id, 
+        {
+            Id: friend.id,
+            Name: formJson.name,
+            LastContactDate: formJson.lastContact,
+            CategoryId: formJson.categorySel,
+            DesiredContactFrequency: formJson.frequency,
+        })
+        .then(response => console.log(response))
+        .catch(error => console.log(error))
     }
 
     return (
@@ -72,7 +85,7 @@ export default function FriendModal({ handleClose, friendCategories, friend }) {
 
                     </div>
                     <div>
-                        <button type="submit">Create</button>
+                        <button type="submit">{friend ? "Edit" : "Create"}</button>
                         <button type="button" onClick={() => handleClose()}>Cancel</button>
                     </div>
                 </form>

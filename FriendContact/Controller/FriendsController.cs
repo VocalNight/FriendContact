@@ -39,14 +39,26 @@ namespace FriendContact.Controller
         // PUT: api/Friends/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutFriend(int id, Friend friend)
+        public async Task<IActionResult> PutFriend(int id, FriendsDTO friend )
         {
             if (id != friend.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(friend).State = EntityState.Modified;
+            var category = _context.Categories.Find(friend.CategoryId);
+
+            var frien = new Friend
+            {
+                Id = friend.Id,
+                Name = friend.Name,
+                CategoryId = friend.CategoryId,
+                DesiredContactFrequency = friend.DesiredContactFrequency,
+                LastContactDate = friend.LastContactDate,
+                FriendCategory = category
+            };
+
+            _context.Entry(frien).State = EntityState.Modified;
 
             try
             {
