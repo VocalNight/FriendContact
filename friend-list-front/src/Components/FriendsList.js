@@ -7,6 +7,7 @@ export default function FriendsList() {
 const [friends, setFriends] = useState([]);
 const [categories, setCategories] = useState([]);
 const [showFriendsMod, setShowFriendsMod] = useState(false);
+const [currentFriend, setCurrentFriend] = useState(null);
 const [showCategoryMod, setShowCategoryMod] = useState(false);
 
 useEffect(() => {
@@ -34,6 +35,21 @@ const fetchCategories = async () => {
     }
 }
 
+const editItem = (friend) => {
+    console.log(friend)
+    setCurrentFriend(friend);
+    setShowFriendsMod(true);
+}
+
+const addItem = () => {
+    setCurrentFriend(null);
+    setShowFriendsMod(true);
+}
+
+const deleteItem = (id) => {
+    axios.delete('https://localhost:7187/api/Friends/' + id);
+}
+
     return(
         <>
         <div>
@@ -45,16 +61,19 @@ const fetchCategories = async () => {
                         {friend.lastContactDate} - 
                         {friend.desiredContactFrequency} - 
                         {categories.find(c => c.id === friend.categoryId).name}
-                        <button type="button">Edit</button>
-                        <button type="button">Delete</button>
+                        <button type="button" onClick={() => editItem(friend)}>Edit</button>
+                        <button type="button" onClick={() => deleteItem(friend.id)}>Delete</button>
                         </li>
                 ))}
             </ul>
             <Modal className="modal" ariaHideApp={false} isOpen={showFriendsMod}>
-                    <FriendModal handleClose={() => setShowFriendsMod(false)} friendCategories={categories} />
+                    <FriendModal 
+                    handleClose={() => setShowFriendsMod(false)} 
+                    friendCategories={categories} 
+                    friend={currentFriend} />
             </Modal>
             <div>
-                <button type="button" onClick={() => setShowFriendsMod(true)}>New Friend</button>
+                <button type="button" onClick={() => addItem()}>New Friend</button>
                 <button type="button">New Category</button>
             </div>
         </div>

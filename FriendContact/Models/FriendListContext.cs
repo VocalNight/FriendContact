@@ -23,7 +23,7 @@ namespace FriendContact.Models
 
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Friend>().HasData(
-                    new Friend { Id = 1, Name = "John", CategoryId = 1, DesiredContactFrequency = 3, LastContactDate = DateTime.Now.Date }
+                    new Friend { Id = 1, Name = "John", CategoryId = 1, DesiredContactFrequency = 3, LastContactDate = DateOnly.FromDateTime(DateTime.Now) }
                 );
         }
 

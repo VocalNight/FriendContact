@@ -1,6 +1,8 @@
 import axios from 'axios';
+import { useState } from 'react';
 
-export default function FriendModal({ handleClose, friendCategories }) {
+export default function FriendModal({ handleClose, friendCategories, friend }) {
+    const [selectedCategory, setSelectedCategory] = useState(friend ? friend.categoryId : '');
 
     function handleSubmit(e) {
         e.preventDefault();
@@ -9,7 +11,11 @@ export default function FriendModal({ handleClose, friendCategories }) {
         const formData = new FormData(form);
         const formJson = Object.fromEntries(formData.entries());
 
-        createFriend(formJson);
+        if (!friend) {
+
+        } else {
+            createFriend(formJson);
+        }
         
         handleClose();
     }
@@ -18,7 +24,7 @@ export default function FriendModal({ handleClose, friendCategories }) {
         axios.post('https://localhost:7187/api/Friends',
         {
             Name: formJson.name,
-            LastContactDate: '2024-02-13T21:22:10.653Z',
+            LastContactDate: formJson.lastContact,
             CategoryId: formJson.categorySel,
             DesiredContactFrequency: formJson.frequency,
         })
@@ -33,16 +39,32 @@ export default function FriendModal({ handleClose, friendCategories }) {
                     <div>
 
                         <label htmlFor="fName">Name</label>
-                        <input name="name" id="fName" type="text"></input>
+                        <input 
+                        name="name" 
+                        defaultValue={friend ? friend.name : ""} 
+                        id="fName" 
+                        type="text"></input>
 
                         <label htmlFor="fDaysWanted">Desired Contact Frequency</label>
-                        <input name="frequency" type="number" id="fDaysWanted"></input>
+                        <input 
+                        name="frequency" 
+                        type="number" 
+                        defaultValue={friend ? friend.desiredContactFrequency : 0}
+                        id="fDaysWanted"></input>
 
                         <label htmlFor="lastContact">Last contacted</label>
-                        <input name="lastContact" id="lastContact" type="date" />
+                        <input 
+                        name="lastContact" 
+                        defaultValue={friend ? friend.lastContactDate : null }
+                        id="lastContact" 
+                        type="date" />
 
                         <label htmlFor="categories">Category</label>
-                        <select name="categorySel" id="categories">
+                        <select 
+                        value={selectedCategory} 
+                        onChange={e => setSelectedCategory(e.target.value)}
+                        name="categorySel" 
+                        id="categories">
                             {friendCategories.map(category => (
                                 <option key={category.id} value={category.id}>{category.name}</option>
                             ))}
