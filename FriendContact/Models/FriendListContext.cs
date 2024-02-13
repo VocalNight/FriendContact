@@ -14,6 +14,17 @@ namespace FriendContact.Models
                 .WithMany(e => e.Friends)
                 .HasForeignKey(e => e.CategoryId)
                 .IsRequired();
+
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Category>().HasData(
+                    new Category { Id = 1, Name = "Friend" },
+                    new Category { Id = 2, Name = "Best-Friend" }
+                );
+
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Friend>().HasData(
+                    new Friend { Id = 1, Name = "John", CategoryId = 1, DesiredContactFrequency = 3, LastContactDate = DateTime.Now.Date }
+                );
         }
 
         public DbSet<Friend> Friends { get; set; }
