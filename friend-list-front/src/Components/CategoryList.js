@@ -23,7 +23,6 @@ export default function CategoryList() {
     }
 
     const editItem = (category) => {
-        console.log(category);
         setCurrentCategory(category);
         setShowCategoryMod(true);
     }
@@ -43,10 +42,10 @@ export default function CategoryList() {
                 <ul>
                     {categories.map(category => (
                         <li
-                            key={category.id}>
-                            {category.name} -
+                            key={category.Id}>
+                            {category.Name} -
                             <button type="button" onClick={() => editItem(category)}>Edit</button>
-                            <button type="button" onClick={() => deleteItem(category.id)}>Delete</button>
+                            <button type="button" onClick={() => deleteItem(category.Id)}>Delete</button>
                         </li>
                     ))}
                 </ul>

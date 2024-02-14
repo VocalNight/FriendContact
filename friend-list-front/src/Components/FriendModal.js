@@ -1,8 +1,11 @@
 import axios from 'axios';
 import { useState } from 'react';
+import { updateFriend } from '../Slices/friendsSlice';
+import { useDispatch } from 'react-redux';
 
 export default function FriendModal({ handleClose, friendCategories, friend }) {
-    const [selectedCategory, setSelectedCategory] = useState(friend ? friend.categoryId : '');
+    const [selectedCategory, setSelectedCategory] = useState(friend ? friend.CategoryId : '');
+    const dispatch = useDispatch();
 
     function handleSubmit(e) {
         e.preventDefault();
@@ -33,16 +36,14 @@ export default function FriendModal({ handleClose, friendCategories, friend }) {
     }
 
     function editFriend(friend, formJson) {
-        axios.put('https://localhost:7187/api/Friends/' + friend.id, 
-        {
-            Id: friend.id,
-            Name: formJson.name,
-            LastContactDate: formJson.lastContact,
-            CategoryId: formJson.categorySel,
-            DesiredContactFrequency: formJson.frequency,
-        })
-        .then(response => console.log(response))
-        .catch(error => console.log(error))
+        dispatch(updateFriend( 
+            {
+                Id: friend.Id,
+                Name: formJson.name,
+                LastContactDate: formJson.lastContactDate,
+                CategoryId: formJson.categoryId,
+                DesiredContactFrequency: formJson.desiredContactFrequency,
+            }))
     }
 
     return (
@@ -54,21 +55,21 @@ export default function FriendModal({ handleClose, friendCategories, friend }) {
                         <label htmlFor="fName">Name</label>
                         <input 
                         name="name" 
-                        defaultValue={friend ? friend.name : ""} 
+                        defaultValue={friend ? friend.Name : ""} 
                         id="fName" 
                         type="text"></input>
 
                         <label htmlFor="fDaysWanted">Desired Contact Frequency</label>
                         <input 
-                        name="frequency" 
+                        name="desiredContactFrequency" 
                         type="number" 
-                        defaultValue={friend ? friend.desiredContactFrequency : 0}
+                        defaultValue={friend ? friend.DesiredContactFrequency : 0}
                         id="fDaysWanted"></input>
 
                         <label htmlFor="lastContact">Last contacted</label>
                         <input 
-                        name="lastContact" 
-                        defaultValue={friend ? friend.lastContactDate : null }
+                        name="lastContactDate" 
+                        defaultValue={friend ? friend.LastContactDate : null }
                         id="lastContact" 
                         type="date" />
 
@@ -76,10 +77,10 @@ export default function FriendModal({ handleClose, friendCategories, friend }) {
                         <select 
                         value={selectedCategory} 
                         onChange={e => setSelectedCategory(e.target.value)}
-                        name="categorySel" 
+                        name="categoryId" 
                         id="categories">
                             {friendCategories.map(category => (
-                                <option key={category.id} value={category.id}>{category.name}</option>
+                                <option key={category.Id} value={category.Id}>{category.Name}</option>
                             ))}
                         </select>
 

@@ -19,8 +19,6 @@ export default function FriendsList() {
     const loadingCategories = useSelector((state) => state.categories.loading);
     const errorCategories = useSelector((state) => state.categories.error);
 
-
-
     useEffect(() => {
         if (categories.length === 0) {
             dispatch(fetchCategoriesList());
@@ -28,10 +26,11 @@ export default function FriendsList() {
         if (friends.length === 0) {
             dispatch(fetchFriendsList());
         }
+
+       // friends.map(friend => {console.log(friend)});
     }, [])
 
     const editItem = (friend) => {
-        console.log(friend)
         setCurrentFriend(friend);
         setShowFriendsMod(true);
     }
@@ -50,19 +49,22 @@ export default function FriendsList() {
             <div>
                 {loading || loadingCategories ? (
                     <p>loading friends and categories...</p>
-                ) : error || errorCategories  ? (
+                ) : error || errorCategories ? (
                     <p>Error loading your friends: {error}</p>
                 ) : (
                     <ul>
                         {friends.map(friend => (
                             <li
-                                key={friend.id}>
-                                {friend.name} -
-                                {friend.lastContactDate} -
-                                {friend.desiredContactFrequency} -
-                                {categories.find(c => c.id === friend.categoryId).name}
+                                key={friend.Id}>
+                                {friend.Name} -
+                                {friend.LastContactDate} -
+                                {friend.DesiredContactFrequency} -
+                                {console.log(categories)}
+                                {console.log(friend)}
+                                {console.log(categories.find(c => c.Id === friend.CategoryId))}
+                                {categories.find(c => c.Id == friend.CategoryId).Name}
                                 <button type="button" onClick={() => editItem(friend)}>Edit</button>
-                                <button type="button" onClick={() => deleteItem(friend.id)}>Delete</button>
+                                <button type="button" onClick={() => deleteItem(friend.Id)}>Delete</button>
                             </li>
                         ))}
                     </ul>
