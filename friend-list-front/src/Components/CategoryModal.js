@@ -1,9 +1,6 @@
 import axios from 'axios';
-import { useState } from 'react';
 
 export default function CategoryModal({ handleClose, currentCategory }) {
-    //const [category, setCategory] = useState('');
-
 
     function handleSubmit(e) {
         e.preventDefault();

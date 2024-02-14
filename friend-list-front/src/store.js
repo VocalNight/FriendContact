@@ -1,10 +1,13 @@
-import {configureStore} from '@reduxjs/toolkit'
-import counterSlice from './counterSlice'
-import SumUp from './SumUp'
+import { configureStore } from '@reduxjs/toolkit';
+import friendsReducer from './Slices/friendsSlice';
+import categoriesReducer from './Slices/categoriesSlice';
 
-export default configureStore({
+
+const store = configureStore({
     reducer: {
-        counter: counterSlice,
-        newCounter: SumUp,
+        friends: friendsReducer,
+        categories: categoriesReducer,
     },
 })
+
+export default store;
