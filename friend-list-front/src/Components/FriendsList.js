@@ -8,7 +8,7 @@ const [friends, setFriends] = useState([]);
 const [categories, setCategories] = useState([]);
 const [showFriendsMod, setShowFriendsMod] = useState(false);
 const [currentFriend, setCurrentFriend] = useState(null);
-const [showCategoryMod, setShowCategoryMod] = useState(false);
+
 
 useEffect(() => {
     fetchCategories();
@@ -74,7 +74,6 @@ const deleteItem = (id) => {
             </Modal>
             <div>
                 <button type="button" onClick={() => addItem()}>New Friend</button>
-                <button type="button">New Category</button>
             </div>
         </div>
         </>
