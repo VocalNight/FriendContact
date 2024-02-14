@@ -41,7 +41,8 @@ export default function FriendModal({ handleClose, friendCategories, friend }) {
                 Id: friend.Id,
                 Name: formJson.name,
                 LastContactDate: formJson.lastContactDate,
-                CategoryId: formJson.categoryId,
+                //Returns the id as a string if i don't do this :)
+                CategoryId: parseInt(formJson.categoryId), 
                 DesiredContactFrequency: formJson.desiredContactFrequency,
             }))
     }

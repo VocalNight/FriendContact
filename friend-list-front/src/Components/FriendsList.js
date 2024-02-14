@@ -59,10 +59,7 @@ export default function FriendsList() {
                                 {friend.Name} -
                                 {friend.LastContactDate} -
                                 {friend.DesiredContactFrequency} -
-                                {console.log(categories)}
-                                {console.log(friend)}
-                                {console.log(categories.find(c => c.Id === friend.CategoryId))}
-                                {categories.find(c => c.Id == friend.CategoryId).Name}
+                                {categories.find(c => c.Id === friend.CategoryId).Name}
                                 <button type="button" onClick={() => editItem(friend)}>Edit</button>
                                 <button type="button" onClick={() => deleteItem(friend.Id)}>Delete</button>
                             </li>
