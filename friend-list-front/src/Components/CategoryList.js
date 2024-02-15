@@ -28,16 +28,23 @@ export default function CategoryList() {
     return (
         <>
             <div>
-                <ul>
-                    {categories.map(category => (
-                        <li
-                            key={category.Id}>
-                            {category.Name} -
-                            <button type="button" onClick={() => editItem(category)}>Edit</button>
-                            <button type="button" onClick={() => deleteItem(category.Id)}>Delete</button>
-                        </li>
-                    ))}
-                </ul>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        {categories.map(category => (
+                            <tr key={category.Id}>
+                                <td>{category.Name}</td>
+                                <td><button type="button" onClick={() => editItem(category)}>Edit</button></td>
+                                <td><button type="button" onClick={() => deleteItem(category.Id)}>Delete</button></td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
                 <Modal className="modal" ariaHideApp={false} isOpen={showCategoryMod}>
                     <CategoryModal
                         handleClose={() => setShowCategoryMod(false)}

@@ -49,19 +49,29 @@ export default function FriendsList() {
                 ) : error || errorCategories ? (
                     <p>Error loading your friends: {error}</p>
                 ) : (
-                    <ul>
-                        {friends.map(friend => (
-                            <li
-                                key={friend.Id}>
-                                {friend.Name} -
-                                {friend.LastContactDate} -
-                                {friend.DesiredContactFrequency} -
-                                {categories.find(c => c.Id === friend.CategoryId).Name}
-                                <button type="button" onClick={() => editItem(friend)}>Edit</button>
-                                <button type="button" onClick={() => deleteItem(friend.Id)}>Delete</button>
-                            </li>
-                        ))}
-                    </ul>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Last Contact Date</th>
+                                <th>Friend Category</th>
+                                <th>Desired Contact Frequency (Days)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            {friends.map(friend => (
+                                <tr key={friend.Id}>
+                                    <td>{friend.Name}</td>
+                                    <td>{friend.LastContactDate}</td>
+                                    <td>{categories.find(c => c.Id === friend.CategoryId).Name}</td>
+                                    <td>{friend.DesiredContactFrequency}</td>
+                                    <td><button type="button" onClick={() => editItem(friend)}>Edit</button></td>
+                                    <td><button type="button" onClick={() => deleteItem(friend.Id)}>Delete</button></td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
                 )}
                 <Modal className="modal" ariaHideApp={false} isOpen={showFriendsMod}>
                     <FriendModal

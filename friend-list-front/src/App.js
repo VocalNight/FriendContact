@@ -12,13 +12,19 @@ function App() {
 
   return (
     <>
-    {showFriends ?
-     <FriendsList/> : <CategoryList/> }
-     <div>
-      <button onClick={() => changeView()}>
-        {showFriends ? "Show Categories" : "Show Friends"}
-        </button>
-     </div>
+      <div className='header'>
+        <h1>Friend List manager</h1>
+      </div>
+      <div className='mainView'>
+        {showFriends ?
+          <FriendsList /> : <CategoryList />}
+        <br></br>
+        <div>
+          <button onClick={() => changeView()}>
+            {showFriends ? "Show Categories" : "Show Friends"}
+          </button>
+        </div>
+      </div>
     </>
   );
 }
