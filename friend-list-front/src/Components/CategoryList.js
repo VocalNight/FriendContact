@@ -1,26 +1,15 @@
-import CategoryModal from "./CategoryModal";
-import { useEffect, useState } from "react";
-import axios from 'axios';
+import { useState } from "react";
+import { useDispatch, useSelector } from 'react-redux';
+import { removeCategory } from "../Slices/categoriesSlice";
 import Modal from 'react-modal'
+import CategoryModal from "./CategoryModal";
 
 export default function CategoryList() {
-    const [categories, setCategories] = useState([]);
     const [showCategoryMod, setShowCategoryMod] = useState(false);
     const [currentCategory, setCurrentCategory] = useState(null);
 
-    useEffect(() => {
-        fetchCategories();
-    }, [])
-
-    const fetchCategories = async () => {
-        try {
-            const response = await axios.get('https://localhost:7187/api/Categories');
-            setCategories(response.data);
-        }
-        catch (error) {
-            console.log(error)
-        }
-    }
+    const categories = useSelector((state) => state.categories.categories);
+    const dispatch = useDispatch();
 
     const editItem = (category) => {
         setCurrentCategory(category);
@@ -32,8 +21,8 @@ export default function CategoryList() {
         setShowCategoryMod(true);
     }
 
-    const deleteItem = (id) => {
-        axios.delete('https://localhost:7187/api/Categories/' + id);
+    const deleteItem = async (id) => {
+        await dispatch(removeCategory(id));
     }
 
     return (

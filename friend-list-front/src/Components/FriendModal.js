@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { useState } from 'react';
 import { addFriend, updateFriend } from '../Slices/friendsSlice';
 import { useDispatch } from 'react-redux';

@@ -95,6 +95,8 @@ namespace FriendContact.Controller
 
             friend.Id = frien.Id;
 
+            // Make sure we send the DTO back
+
             return CreatedAtAction("GetFriend", new { id = frien.Id }, friend);
         }
 

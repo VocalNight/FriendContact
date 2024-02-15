@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import FriendModal from "./FriendModal";
-import Modal from 'react-modal'
 import { fetchFriendsList, removeFriend } from "../Slices/friendsSlice";
 import { fetchCategoriesList } from "../Slices/categoriesSlice";
-
+import FriendModal from "./FriendModal";
+import Modal from 'react-modal'
 
 export default function FriendsList() {
     const [showFriendsMod, setShowFriendsMod] = useState(false);

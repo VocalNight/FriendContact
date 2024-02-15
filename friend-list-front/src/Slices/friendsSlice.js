@@ -15,7 +15,7 @@ export const fetchFriendsList = createAsyncThunk('friends/fetchFriends', async (
 export const removeFriend = createAsyncThunk(
     'friends/removeFriend', async (id, thunk) => {
         try {
-            const response = await axios.delete('https://localhost:7187/api/Friends/' + id);
+            await axios.delete('https://localhost:7187/api/Friends/' + id);
             return id;
         } catch (error) {
             return thunk.rejectWithValue(error);
@@ -26,7 +26,7 @@ export const removeFriend = createAsyncThunk(
 export const updateFriend = createAsyncThunk(
     'friends/updateFriend', async (friend, thunk) => {
         try {
-            const response = await axios.put('https://localhost:7187/api/Friends/' + friend.Id, friend);
+            await axios.put('https://localhost:7187/api/Friends/' + friend.Id, friend);
             return friend;
         } catch (error) {
             return thunk.rejectWithValue(error);
@@ -38,8 +38,6 @@ export const addFriend = createAsyncThunk(
     'friends/addFriend', async (friend, thunk) => {
         try {
             const response = await axios.post('https://localhost:7187/api/Friends', friend);
-            console.log(response);
-            console.log(response.data);
             return response.data;
         } catch (error) {
             return thunk.rejectWithValue(error);

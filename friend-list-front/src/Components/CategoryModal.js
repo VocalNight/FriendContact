@@ -1,6 +1,8 @@
-import axios from 'axios';
+import { addCategory, updateCategory } from '../Slices/categoriesSlice';
+import { useDispatch } from 'react-redux';
 
 export default function CategoryModal({ handleClose, currentCategory }) {
+    const dispatch = useDispatch();
 
     function handleSubmit(e) {
         e.preventDefault();
@@ -19,22 +21,18 @@ export default function CategoryModal({ handleClose, currentCategory }) {
     }
 
     function createCategory(formJson) {
-        axios.post('https://localhost:7187/api/Categories',
-        {
-            Name: formJson.name,
-        })
-        .then(response => console.log(response))
-        .catch(error => console.log(error));
+        dispatch(addCategory({
+            Name: formJson.Name,
+        }));
     }
 
     function editCategory(category, formJson) {
-        axios.put('https://localhost:7187/api/Categories/' + category.id, 
-        {
-            Id: category.id,
-            Name: formJson.name,
-        })
-        .then(response => console.log(response))
-        .catch(error => console.log(error))
+        dispatch(updateCategory(
+            {
+                Id: category.Id,
+                Name: formJson.Name,
+            }
+        ))
     }
 
 
@@ -46,8 +44,8 @@ export default function CategoryModal({ handleClose, currentCategory }) {
 
                         <label htmlFor="fName">Name</label>
                         <input
-                            name="name"
-                            defaultValue={currentCategory ? currentCategory.name : ""}
+                            name="Name"
+                            defaultValue={currentCategory ? currentCategory.Name : ""}
                             id="fName"
                             type="text"></input>
 
