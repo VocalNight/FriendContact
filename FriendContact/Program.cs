@@ -1,13 +1,20 @@
 using FriendContact.Models;
 using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.EntityFrameworkCore;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 const string corsPolicy = "any origin";
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.PropertyNamingPolicy = null; // Use the default naming policy
+        options.JsonSerializerOptions.PropertyNameCaseInsensitive = false; // Honor property name casing
+    });
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy(name: corsPolicy, policy =>

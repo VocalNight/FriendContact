@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useState } from 'react';
-import { updateFriend } from '../Slices/friendsSlice';
+import { addFriend, updateFriend } from '../Slices/friendsSlice';
 import { useDispatch } from 'react-redux';
 
 export default function FriendModal({ handleClose, friendCategories, friend }) {
@@ -9,7 +9,7 @@ export default function FriendModal({ handleClose, friendCategories, friend }) {
 
     function handleSubmit(e) {
         e.preventDefault();
-        
+
         const form = e.target;
         const formData = new FormData(form);
         const formJson = Object.fromEntries(formData.entries());
@@ -24,27 +24,24 @@ export default function FriendModal({ handleClose, friendCategories, friend }) {
     }
 
     function createFriend(formJson) {
-        axios.post('https://localhost:7187/api/Friends',
-        {
+        dispatch(addFriend({
             Name: formJson.name,
-            LastContactDate: formJson.lastContact,
-            CategoryId: formJson.categorySel,
-            DesiredContactFrequency: formJson.frequency,
-        })
-        .then(response => console.log(response))
-        .catch(error => console.log(error));
+            LastContactDate: formJson.lastContactDate,
+            CategoryId: parseInt(formJson.categoryId),
+            DesiredContactFrequency: formJson.desiredContactFrequency,
+        }));
     }
 
     function editFriend(friend, formJson) {
-        dispatch(updateFriend( 
+        dispatch(updateFriend(
             {
                 Id: friend.Id,
                 Name: formJson.name,
                 LastContactDate: formJson.lastContactDate,
                 //Returns the id as a string if i don't do this :)
-                CategoryId: parseInt(formJson.categoryId), 
+                CategoryId: parseInt(formJson.categoryId),
                 DesiredContactFrequency: formJson.desiredContactFrequency,
-            }))
+            }));
     }
 
     return (
@@ -54,32 +51,32 @@ export default function FriendModal({ handleClose, friendCategories, friend }) {
                     <div>
 
                         <label htmlFor="fName">Name</label>
-                        <input 
-                        name="name" 
-                        defaultValue={friend ? friend.Name : ""} 
-                        id="fName" 
-                        type="text"></input>
+                        <input
+                            name="name"
+                            defaultValue={friend ? friend.Name : ""}
+                            id="fName"
+                            type="text"></input>
 
                         <label htmlFor="fDaysWanted">Desired Contact Frequency</label>
-                        <input 
-                        name="desiredContactFrequency" 
-                        type="number" 
-                        defaultValue={friend ? friend.DesiredContactFrequency : 0}
-                        id="fDaysWanted"></input>
+                        <input
+                            name="desiredContactFrequency"
+                            type="number"
+                            defaultValue={friend ? friend.DesiredContactFrequency : 0}
+                            id="fDaysWanted"></input>
 
                         <label htmlFor="lastContact">Last contacted</label>
-                        <input 
-                        name="lastContactDate" 
-                        defaultValue={friend ? friend.LastContactDate : null }
-                        id="lastContact" 
-                        type="date" />
+                        <input
+                            name="lastContactDate"
+                            defaultValue={friend ? friend.LastContactDate : null}
+                            id="lastContact"
+                            type="date" />
 
                         <label htmlFor="categories">Category</label>
-                        <select 
-                        value={selectedCategory} 
-                        onChange={e => setSelectedCategory(e.target.value)}
-                        name="categoryId" 
-                        id="categories">
+                        <select
+                            value={selectedCategory}
+                            onChange={e => setSelectedCategory(e.target.value)}
+                            name="categoryId"
+                            id="categories">
                             {friendCategories.map(category => (
                                 <option key={category.Id} value={category.Id}>{category.Name}</option>
                             ))}

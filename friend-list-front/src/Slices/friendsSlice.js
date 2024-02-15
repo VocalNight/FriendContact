@@ -34,6 +34,19 @@ export const updateFriend = createAsyncThunk(
     }
 )
 
+export const addFriend = createAsyncThunk(
+    'friends/addFriend', async (friend, thunk) => {
+        try {
+            const response = await axios.post('https://localhost:7187/api/Friends', friend);
+            console.log(response);
+            console.log(response.data);
+            return response.data;
+        } catch (error) {
+            return thunk.rejectWithValue(error);
+        }
+    }
+)
+
 const friendsReducer = createReducer(initialState, (builder) => {
     builder.addCase(fetchFriendsList.pending, (state) => {
         state.loading = true;
@@ -51,6 +64,11 @@ const friendsReducer = createReducer(initialState, (builder) => {
         state.loading = false;
         state.error = null;
         state.friends = state.friends.filter(friend => friend.id !== action.payload);
+    })
+    .addCase(addFriend.fulfilled, (state, action) => {
+        state.loading = false;
+        state.error = null;
+        state.friends = [...state.friends, action.payload];
     })
     .addCase(updateFriend.fulfilled, (state, action) => {
         state.loading = false;

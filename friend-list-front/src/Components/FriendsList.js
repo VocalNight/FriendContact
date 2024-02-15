@@ -26,8 +26,6 @@ export default function FriendsList() {
         if (friends.length === 0) {
             dispatch(fetchFriendsList());
         }
-
-       // friends.map(friend => {console.log(friend)});
     }, [])
 
     const editItem = (friend) => {

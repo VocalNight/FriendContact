@@ -25,6 +25,10 @@ namespace FriendContact.Models
             modelBuilder.Entity<Friend>().HasData(
                     new Friend { Id = 1, Name = "John", CategoryId = 1, DesiredContactFrequency = 3, LastContactDate = DateOnly.FromDateTime(DateTime.Now) }
                 );
+
+            modelBuilder.Entity<Friend>()
+            .Property(x => x.Id)
+            .ValueGeneratedOnAdd();
         }
 
         public DbSet<Friend> Friends { get; set; }

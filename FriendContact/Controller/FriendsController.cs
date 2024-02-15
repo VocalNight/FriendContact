@@ -82,7 +82,7 @@ namespace FriendContact.Controller
         // POST: api/Friends
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Friend>> PostFriend(FriendsDTO friend)
+        public async Task<ActionResult<Friend>> PostFriend([FromBody] FriendsDTO friend)
         {
             var category = _context.Categories.Find(friend.CategoryId);
 
@@ -93,7 +93,9 @@ namespace FriendContact.Controller
             _context.Friends.Add(frien);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetFriend", new { id = friend.Id }, friend);
+            friend.Id = frien.Id;
+
+            return CreatedAtAction("GetFriend", new { id = frien.Id }, friend);
         }
 
         // DELETE: api/Friends/5
