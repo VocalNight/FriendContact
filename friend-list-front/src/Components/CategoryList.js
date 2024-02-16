@@ -39,8 +39,18 @@ export default function CategoryList() {
                         {categories.map(category => (
                             <tr key={category.Id}>
                                 <td>{category.Name}</td>
-                                <td><button type="button" onClick={() => editItem(category)}>Edit</button></td>
-                                <td><button type="button" onClick={() => deleteItem(category.Id)}>Delete</button></td>
+                                <td>
+                                    <button 
+                                    type="button" 
+                                    onClick={() => editItem(category)}
+                                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                                    >Edit</button></td>
+                                <td>
+                                    <button 
+                                    type="button" 
+                                    onClick={() => deleteItem(category.Id)}
+                                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                                    >Delete</button></td>
                             </tr>
                         ))}
                     </tbody>
@@ -50,8 +60,8 @@ export default function CategoryList() {
                         handleClose={() => setShowCategoryMod(false)}
                         currentCategory={currentCategory} />
                 </Modal>
-                <div>
-                    <button type="button" onClick={() => addItem()}>New Category</button>
+                <div className="pt-1">
+                    <button type="button" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={() => addItem()}>New Category</button>
                 </div>
             </div>
         </>

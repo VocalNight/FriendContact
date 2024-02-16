@@ -66,8 +66,17 @@ export default function FriendsList() {
                                     <td>{friend.LastContactDate}</td>
                                     <td>{categories.find(c => c.Id === friend.CategoryId).Name}</td>
                                     <td>{friend.DesiredContactFrequency}</td>
-                                    <td><button type="button" onClick={() => editItem(friend)}>Edit</button></td>
-                                    <td><button type="button" onClick={() => deleteItem(friend.Id)}>Delete</button></td>
+                                    <td>
+                                        <button 
+                                        type="button" 
+                                        onClick={() => editItem(friend)}
+                                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                                        >Edit</button></td>
+                                    <td>
+                                        <button 
+                                        type="button" 
+                                        onClick={() => deleteItem(friend.Id)}
+                                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Delete</button></td>
                                 </tr>
                             ))}
                         </tbody>
@@ -79,8 +88,8 @@ export default function FriendsList() {
                         friendCategories={categories}
                         friend={currentFriend} />
                 </Modal>
-                <div>
-                    <button type="button" onClick={() => addItem()}>New Friend</button>
+                <div className="pt-1">
+                    <button type="button" className=" bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={() => addItem()}>New Friend</button>
                 </div>
             </div>
         </>
