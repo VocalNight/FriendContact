@@ -20,7 +20,7 @@ function App() {
           <FriendsList /> : <CategoryList />}
         <br></br>
         <div>
-          <button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded' onClick={() => changeView()}>
+          <button className='bg-amber-700 hover:bg-amber-800 text-white font-bold py-2 px-4 rounded' onClick={() => changeView()}>
             {showFriends ? "Show Categories" : "Show Friends"}
           </button>
         </div>

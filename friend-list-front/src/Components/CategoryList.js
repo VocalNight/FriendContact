@@ -61,7 +61,7 @@ export default function CategoryList() {
                         currentCategory={currentCategory} />
                 </Modal>
                 <div className="pt-1">
-                    <button type="button" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={() => addItem()}>New Category</button>
+                    <button type="button" className="bg-amber-700 hover:bg-amber-800 text-white font-bold py-2 px-4 rounded" onClick={() => addItem()}>New Category</button>
                 </div>
             </div>
         </>
