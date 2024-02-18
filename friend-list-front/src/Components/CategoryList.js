@@ -43,13 +43,13 @@ export default function CategoryList() {
                                     <button 
                                     type="button" 
                                     onClick={() => editItem(category)}
-                                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                                    className="bg-yellow-600 hover:bg-yellow-900 text-white font-bold py-2 px-4 rounded"
                                     >Edit</button></td>
                                 <td>
                                     <button 
                                     type="button" 
                                     onClick={() => deleteItem(category.Id)}
-                                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                                    className="bg-amber-700 hover:bg-amber-800 text-white font-bold py-2 px-4 rounded"
                                     >Delete</button></td>
                             </tr>
                         ))}

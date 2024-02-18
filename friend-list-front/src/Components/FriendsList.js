@@ -41,6 +41,14 @@ export default function FriendsList() {
         await dispatch(removeFriend(id));
     }
 
+    const calculateDate = (friend) => {
+        if (friend.LastContactDate < new Date() + 1) {
+            return 'Contact your friend!'
+        }
+
+        return 'No action needed.'
+    }
+
     return (
         <>
             <div>
@@ -49,13 +57,14 @@ export default function FriendsList() {
                 ) : error || errorCategories ? (
                     <p>Error loading your friends: {error}</p>
                 ) : (
-                    <table>
+                    <table data-testid="friendTable">
                         <thead>
                             <tr>
                                 <th>Name</th>
                                 <th>Last Contact Date</th>
                                 <th>Friend Category</th>
                                 <th>Desired Contact Frequency (Days)</th>
+                                <th>Necessary action/contact</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -66,17 +75,18 @@ export default function FriendsList() {
                                     <td>{friend.LastContactDate}</td>
                                     <td>{categories.find(c => c.Id === friend.CategoryId).Name}</td>
                                     <td>{friend.DesiredContactFrequency}</td>
+                                    <td>{calculateDate(friend)}</td>
                                     <td>
                                         <button 
                                         type="button" 
                                         onClick={() => editItem(friend)}
-                                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                                        className="bg-yellow-600 hover:bg-yellow-900 text-white font-bold py-2 px-4 rounded"
                                         >Edit</button></td>
                                     <td>
                                         <button 
                                         type="button" 
                                         onClick={() => deleteItem(friend.Id)}
-                                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Delete</button></td>
+                                        className="bg-amber-700 hover:bg-amber-800 text-white font-bold py-2 px-4 rounded">Delete</button></td>
                                 </tr>
                             ))}
                         </tbody>

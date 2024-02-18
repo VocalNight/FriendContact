@@ -12,7 +12,7 @@ function App() {
 
   return (
     <>
-      <div className='header'>
+      <div className='header text-5xl font-semibold'>
         <h1>Friend List manager</h1>
       </div>
       <div className='mainView'>

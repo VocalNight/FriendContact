@@ -45,12 +45,12 @@ export default function FriendModal({ handleClose, friendCategories, friend }) {
 
     return (
         <div>
-            <section className="modal-main rounded">
+            <section className="modal-main-friends rounded">
                 <form method="post" onSubmit={handleSubmit}>
-                    <div className='ml-2'>
+                    <div className='ml-2 mt-2'>
                         <label className='mr-2 text-stone-400 font-bold' htmlFor="fName">Name</label>
                         <input
-                            className='shadow bg-stone-500 text-gray-950 appearance-none border rounded py-2 px-3  leading-tight focus:outline-none focus:shadow-outline'
+                            className='shadow bg-stone-500 text-gray-950 appearance-none border rounded py-2 px-3  leading-tight focus:outline-none focus:shadow-outline mb-1'
                             name="name"
                             defaultValue={friend ? friend.Name : ""}
                             id="fName"
@@ -58,7 +58,7 @@ export default function FriendModal({ handleClose, friendCategories, friend }) {
                         <br/>
                         <label className='mr-2 text-stone-400 font-bold' htmlFor="fDaysWanted">Desired Contact Frequency</label>
                         <input
-                            className='shadow  appearance-none border rounded py-2 px-3 bg-stone-500 text-gray-950 leading-tight focus:outline-none focus:shadow-outline'
+                            className='shadow  appearance-none border rounded py-2 px-3 bg-stone-500 text-gray-950 leading-tight focus:outline-none focus:shadow-outline mb-1'
                             name="desiredContactFrequency"
                             type="number"
                             defaultValue={friend ? friend.DesiredContactFrequency : 0}
@@ -66,7 +66,7 @@ export default function FriendModal({ handleClose, friendCategories, friend }) {
                         <br/>
                         <label className='mr-2 text-stone-400 font-bold' htmlFor="lastContact">Last contacted</label>
                         <input
-                            className='shadow appearance-none border rounded py-2 px-3 bg-stone-500 text-gray-950 leading-tight focus:outline-none focus:shadow-outline'
+                            className='shadow appearance-none border rounded py-2 px-3 bg-stone-500 text-gray-950 leading-tight focus:outline-none focus:shadow-outline mb-1'
                             name="lastContactDate"
                             defaultValue={friend ? friend.LastContactDate : null}
                             id="lastContact"
@@ -74,7 +74,7 @@ export default function FriendModal({ handleClose, friendCategories, friend }) {
                         <br/>
                         <label className='mr-2 text-stone-400 font-bold' htmlFor="categories">Category</label>
                         <select
-                            className='shadow appearance-none border rounded py-2 px-3 bg-stone-500 text-gray-950 leading-tight focus:outline-none focus:shadow-outline'
+                            className='shadow appearance-none border rounded py-2 px-3 bg-stone-500 text-gray-950 leading-tight focus:outline-none focus:shadow-outline mb-1'
                             value={selectedCategory}
                             onChange={e => setSelectedCategory(e.target.value)}
                             name="categoryId"

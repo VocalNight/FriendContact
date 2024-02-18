@@ -27,11 +27,21 @@ code {
   background: rgba(0, 0, 0, 0.6);
 }
 
-.modal-main {
+.modal-main-friends {
   position:fixed;
   background-color: #44403c;
-  width: 40%;
+  width: 25%;
   height: 30%;
+  top:50%;
+  left:50%;
+  transform: translate(-50%,-50%);
+}
+
+.modal-main-categories {
+  position:fixed;
+  background-color: #44403c;
+  width: 25%;
+  height: 15%;
   top:50%;
   left:50%;
   transform: translate(-50%,-50%);
@@ -66,7 +76,7 @@ caption {
 
 thead,
 tfoot {
-  background-color: rgb(228 240 245);
+  background-color: #78716c;
 }
 
 th,
@@ -79,8 +89,8 @@ td:last-of-type {
   text-align: center;
 }
 
-tbody > tr:nth-of-type(even) {
-  background-color: rgb(237 238 242);
+tbody  {
+  background-color: #57534e;
 }
 
 tfoot th {
