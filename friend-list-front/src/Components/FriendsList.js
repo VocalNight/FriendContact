@@ -2,8 +2,11 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchFriendsList, removeFriend } from "../Slices/friendsSlice";
 import { fetchCategoriesList } from "../Slices/categoriesSlice";
+import { addDays, parseISO } from 'date-fns';
 import FriendModal from "./FriendModal";
 import Modal from 'react-modal'
+
+
 
 export default function FriendsList() {
     const [showFriendsMod, setShowFriendsMod] = useState(false);
@@ -42,7 +45,16 @@ export default function FriendsList() {
     }
 
     const calculateDate = (friend) => {
-        if (friend.LastContactDate < new Date() + 1) {
+
+        var parsedDate = parseISO(friend.LastContactDate);
+        var newDate = addDays(parsedDate, parseInt(friend.DesiredContactFrequency));
+
+        console.log(newDate);
+        console.log(new Date());
+
+        console.log(new Date() >= newDate);
+
+        if (new Date() >= newDate) {
             return 'Contact your friend!'
         }
 
@@ -77,16 +89,16 @@ export default function FriendsList() {
                                     <td>{friend.DesiredContactFrequency}</td>
                                     <td>{calculateDate(friend)}</td>
                                     <td>
-                                        <button 
-                                        type="button" 
-                                        onClick={() => editItem(friend)}
-                                        className="bg-yellow-600 hover:bg-yellow-900 text-white font-bold py-2 px-4 rounded"
+                                        <button
+                                            type="button"
+                                            onClick={() => editItem(friend)}
+                                            className="bg-yellow-600 hover:bg-yellow-900 text-white font-bold py-2 px-4 rounded"
                                         >Edit</button></td>
                                     <td>
-                                        <button 
-                                        type="button" 
-                                        onClick={() => deleteItem(friend.Id)}
-                                        className="bg-amber-700 hover:bg-amber-800 text-white font-bold py-2 px-4 rounded">Delete</button></td>
+                                        <button
+                                            type="button"
+                                            onClick={() => deleteItem(friend.Id)}
+                                            className="bg-amber-700 hover:bg-amber-800 text-white font-bold py-2 px-4 rounded">Delete</button></td>
                                 </tr>
                             ))}
                         </tbody>

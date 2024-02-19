@@ -55,7 +55,7 @@ export default function FriendModal({ handleClose, friendCategories, friend }) {
                             defaultValue={friend ? friend.Name : ""}
                             id="fName"
                             type="text"></input>
-                        <br/>
+                        <br />
                         <label className='mr-2 text-stone-400 font-bold' htmlFor="fDaysWanted">Desired Contact Frequency</label>
                         <input
                             className='shadow  appearance-none border rounded py-2 px-3 bg-stone-500 text-gray-950 leading-tight focus:outline-none focus:shadow-outline mb-1'
@@ -63,7 +63,7 @@ export default function FriendModal({ handleClose, friendCategories, friend }) {
                             type="number"
                             defaultValue={friend ? friend.DesiredContactFrequency : 0}
                             id="fDaysWanted"></input>
-                        <br/>
+                        <br />
                         <label className='mr-2 text-stone-400 font-bold' htmlFor="lastContact">Last contacted</label>
                         <input
                             className='shadow appearance-none border rounded py-2 px-3 bg-stone-500 text-gray-950 leading-tight focus:outline-none focus:shadow-outline mb-1'
@@ -71,7 +71,7 @@ export default function FriendModal({ handleClose, friendCategories, friend }) {
                             defaultValue={friend ? friend.LastContactDate : null}
                             id="lastContact"
                             type="date" />
-                        <br/>
+                        <br />
                         <label className='mr-2 text-stone-400 font-bold' htmlFor="categories">Category</label>
                         <select
                             className='shadow appearance-none border rounded py-2 px-3 bg-stone-500 text-gray-950 leading-tight focus:outline-none focus:shadow-outline mb-1'
@@ -85,14 +85,14 @@ export default function FriendModal({ handleClose, friendCategories, friend }) {
                         </select>
 
                     </div>
-                    <br/>
+                    <br />
                     <div>
-                        <button 
-                        className='
+                        <button
+                            className='
                         bg-yellow-600 hover:bg-yellow-900  text-white font-bold py-2 px-4 rounded m-2'
-                        type="submit">{friend ? "Edit" : "Create"}</button>
-                        <button className=' text-white bg-amber-700 hover:bg-amber-800 font-bold py-2 px-4 rounded' 
-                        type="button" onClick={() => handleClose()}>Cancel</button>
+                            type="submit">{friend ? "Edit" : "Create"}</button>
+                        <button className=' text-white bg-amber-700 hover:bg-amber-800 font-bold py-2 px-4 rounded'
+                            type="button" onClick={() => handleClose()}>Cancel</button>
                     </div>
                 </form>
             </section>
